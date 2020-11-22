@@ -16,13 +16,14 @@ void printVector(std:: vector<std:: vector<T>> &A){
     }
 }
 
-void fillVector(std:: vector<std:: vector<int>> &V, std:: vector<std:: vector<int>> &A){
+std:: vector<std:: vector<int>> fillVector(std:: vector<std:: vector<int>> &V){
     int ysize = V.size()+2;
     int xsize = V[0].size()+2;
-    
+    std::vector<std:: vector<int>> A(ysize, std::vector<int> (xsize, 0));
     for(int i = 0; i < ysize; i++){
         
         for(int j=0; j < xsize; j++){
+            
             if(i == 0 || i == ysize-1){
                 A[i][j] = 0;
             }else if(j == 0 || j == xsize-1){
@@ -30,8 +31,11 @@ void fillVector(std:: vector<std:: vector<int>> &V, std:: vector<std:: vector<in
             }else{
                 A[i][j] = V[i-1][j-1];
             }
+            
         }
+        
     }
+    return A;
     
 }
 
@@ -44,22 +48,13 @@ std:: vector<int> getMatrix(std:: string str){
     }
     return V;
 }
-bool checkPos(std:: vector< std:: vector<int>> A, stack&s){
-    
-}
 
-bool path_finder(std:: vector<std:: vector<int>> &V, stack &s){
-    int ysize = V.size()+2;
-    int xsize = V[0].size()+2;
-    std::vector<std:: vector<int>> A(ysize, std::vector<int> (xsize, 0));
-    fillVector(V,A);
-    checkPos(A,s);
-    return true;
-}
+
+
 
 
 int main(){
-    
+    stack s;
     std:: string filename = "matrix.txt";
     
     std:: ifstream ifs;
@@ -68,16 +63,13 @@ int main(){
     std:: vector<std:: vector<int>> V;
     std:: string str;
     
-    std:: vector<std:: vector<char>> A;
+    std:: vector<std:: vector<int>> A;
     while(getline(ifs, str)) {
       V.push_back(getMatrix(str));
     }
-    
-    printVector(V);
-    
-    stack s;
-     
-    path_finder(V, s);
+
+    A = fillVector(V);
+    s.path_finder(A, 4);
     
     return 0;
 }

@@ -12,14 +12,13 @@ class stack{
   int pop();
   int peek();
   bool isEmpty();
-  bool path_finder(std:: vector<std:: vector<int>> &V);
+  bool path_finder(std:: vector<std:: vector<int>> &V, int n);
   private:
   struct node{
     int x,y;
     node* next;
   };
   node *top;
-  void fillVector(std::vector<std:: vector<int>> &V, std:: vector<std:: vector<int>> &A);
 };
 
 
@@ -66,27 +65,26 @@ bool stack :: isEmpty(){
   return false;
 }
 
-void stack:: fillVector(std:: vector<std:: vector<int>> &V, std:: vector<std:: vector<int>> &A){
-    int ysize = V.size()+2;
-    int xsize = V[0].size()+2;
+bool stack:: path_finder(std:: vector<std:: vector<int>> &V, int n){
+    // int ysize = V.size()+2;
+    // int xsize = V[0].size()+2;
+    // std::vector<std:: vector<int>> A(ysize, std::vector<int> (xsize, 0));
+    //fillVector(V,A);
     
-    for(int i = 0; i < ysize; i++){
-        
-        for(int j=0; j < xsize; j++){
-            if(i == 0 || i == ysize-1){
-                A[i][j] = 0;
-            }else if(j == 0 || j == xsize-1){
-                A[i][j] = 0;
-            }else{
-                A[i][j] = V[i-1][j-1];
-            }
-        }
-    }
-    
-}
-
-bool stack:: path_finder(std:: vector<std:: vector<int>> &V){
-  return true;
+    // checkPos(A,s);
+  
+  int startx = 1;
+  int starty = 1;
+  // int endx = V[0].size()-1;
+  // int endy = V.size()-1;
+  
+  if(V[startx][starty] == 1){
+    std:: cout << n << std:: endl;
+    std:: cout << "true" << std:: endl;
+    return true;
+  }
+  std:: cout << "false" << std:: endl;
+  return false;
 }
 
 
