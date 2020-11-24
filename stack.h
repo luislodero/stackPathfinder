@@ -79,7 +79,6 @@ bool stack:: path_finder(std:: vector<std:: vector<int>> &V, int n){
   // int endy = V.size()-1;
   
   if(V[startx][starty] == 1){
-    std:: cout << n << std:: endl;
     std:: cout << "true" << std:: endl;
     return true;
   }
