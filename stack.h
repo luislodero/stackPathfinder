@@ -5,80 +5,82 @@
 #include <string>
 
 class stack{
-  public:
-
-  stack();
-  void push(int x, int y);
-  std:: string pop();
-  std:: string peek();
-  bool isEmpty();
-  int length();
-  
-//   ~ordered_set();
-
-// ordered_set(const ordered_set&);
-
-// const ordered_set& operator = (const ordered_set&);
+ 
+  //const stack& operator = (const stack&);
   
   private:
   struct node{
     int x,y;
     node* next;
   };
+  
   node *top;
   int size;
+  
+  
+   public:
+
+  stack();
+  void push(int y, int x);
+  std:: string pop();
+  std:: string peek();
+  bool isEmpty();
+  int length();
+  void delAll();
+  void copyList(node *p);
+  ~stack();
+  stack(const stack&);
+  
 };
 
-// void ordered_set:: delAll(){
-//   node *t = head;
-//   node *c;
-//     while(t){
-//       c = t->next;
-//       delete t;
-//       t = c;
-//     }
+void stack:: delAll(){
+  node *t = top;
+  node *c;
+    while(t){
+      c = t->next;
+      delete t;
+      t = c;
+    }
   
-// }
+}
 
-// void ordered_set:: copyList(node *p){
-//   if(p!=nullptr){
+void stack:: copyList(node *p){
+  if(p!=nullptr){
     
-//     head = new node{p->data, nullptr};
-// node* curr = p->next;
-//     node* temp = head;
+    top = new node{p->y, p->x, nullptr};
+    node* curr = p->next;
+    node* temp = top;
 
-//     while (curr) {
-//         temp->next = new node{curr->data, nullptr};
-//         temp = temp->next;
-//         curr = curr->next;
+    while (curr) {
+        temp->next = new node{curr->y, curr->x, nullptr};
+        temp = temp->next;
+        curr = curr->next;
         
-//     }
+    }
     
-//   }
+  }
 
-// }
+}
 
-// ordered_set:: ~ordered_set(){
+stack:: ~stack(){
   
-//   delAll();
+  delAll();
  
-//   head = nullptr;
-//   curr = nullptr;
-//   std:: cout << "-----------------DELETE-------------------" << std:: endl;
+  top = nullptr;
+  std:: cout << "-----------------DELETE-------------------" << std:: endl;
 
-// }
+}
 
 
-// ordered_set:: ordered_set(const ordered_set& os5){
+stack:: stack(const stack& os5){
     
    
-//     if(os5.head != nullptr){
-//     copyList(os5.head);
-      
-//     }
+    if(os5.top != nullptr){
+    copyList(os5.top);
+    }
     
-//     std:: cout << "-----------------COPY---------------------" << std:: endl;
-// }
+    std:: cout << "-----------------COPY---------------------" << std:: endl;
+}
 
 
 // const ordered_set& ordered_set:: operator = (const ordered_set & os5){
@@ -107,8 +109,8 @@ stack:: stack(){
 }
 
 
-void stack:: push(int x, int y){
-  top = new node{x,y,top};
+void stack:: push(int y, int x){
+  top = new node{y,x,top};
   size++;
 }
 

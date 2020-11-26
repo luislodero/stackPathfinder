@@ -69,7 +69,11 @@ bool path_finder(std:: vector<std:: vector<char>>&C, std:: vector<std:: vector<i
     len--;
     while(len > 0 || count > 0){
         
-
+/**
+ * GOTTA MAKE SURE DIRECTIONS ARE CLEAR AND 
+ * MAKE SURE IT'S NOT MOVING TO A SMALLER NUMBER PLS
+ *
+**/
         if((!visited(A,curry,currx-1)) && (A[curry][currx] <=A[curry][currx-1])){
 
             A[curry][currx] = -99;  //left
@@ -117,18 +121,18 @@ bool path_finder(std:: vector<std:: vector<char>>&C, std:: vector<std:: vector<i
             len--;
             std:: cout << "heye4444444yeyeyey" << std:: endl;
             std:: cout << len << std:: endl;
-                        std:: cout << curry << " " << currx << std:: endl;
+            std:: cout << curry << " " << currx << std:: endl;
 
         }else{
             return false;
         }
         
     }
-    // if(len != 0){
+    if(len <= 0){
         
-    //     C[0][0] = 'z';
+        C[0][0] = 'z';
         
-    // }
+    }
     
     // std:: cout << s.pop() << std:: endl;
     // std:: cout << s.pop() << std:: endl;
