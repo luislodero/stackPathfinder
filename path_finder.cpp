@@ -52,60 +52,75 @@ std:: vector<int> getMatrix(std:: string str){
 
 bool visited(std:: vector<std:: vector<int>> A, int y, int x){
     if(A[y][x] > 0){
-        return true;
+        return false;
     }
-    return false;
+    return true;
 }
 
-bool path_finder(std:: vector<std:: vector<char>>C, std:: vector<std:: vector<int>> A, int py, int px, int len){
+bool path_finder(std:: vector<std:: vector<char>>&C, std:: vector<std:: vector<int>> A, int py, int px, int &len){
 
     stack s;
     s.push(py, px);
     std:: string  str= s.peek();
     int curry = str[0] - '0';
     int currx = str[1] - '0';
+    //std:: cout << str << std:: endl;
     len--;
-    while(len > 0 && !s.isEmpty()){
-        std:: cout << "hello" << std:: endl;
-        if(!visited(A,curry,currx-1) && (A[curry][currx] <=A[curry][currx-1])){
+    while(len >= 0){
+        
+
+        if((!visited(A,curry,currx-1)) && (A[curry][currx] <=A[curry][currx-1])){
+            
             A[curry][currx] = -99;  //left
             s.push(curry, currx-1);
             str = s.peek();
-            curry = str[0];
-            currx = str[1];
+            curry = str[0] - '0';
+            currx = str[1] - '0';
             len--;
             std:: cout << "heyeyeye111111yey" << std:: endl;
-        }else if(!visited(A,curry,currx) && (A[curry][currx] <=A[curry-1][currx])){
+                    std:: cout << len << std:: endl;
+
+            
+        }else if(!visited(A,curry-1,currx) && (A[curry][currx] <=A[curry-1][currx])){
+            
             A[curry][currx] = -99;  //up
-            s.push(curry, currx);
+            s.push(curry-1, currx);
             str = s.peek();
-            curry = str[0];
-            currx = str[1];
+            curry = str[0] - '0';
+            currx = str[1] - '0';
             len--;
-                        std:: cout << "hey222222eyeyeyey" << std:: endl;
+            std:: cout << "hey222222eyeyeyey" << std:: endl;
+                    std:: cout << len << std:: endl;
+                printVector(A);
 
-        }else if(!visited(A,curry,currx-1) && (A[curry][currx] <=A[curry][currx-1])){
-           A[curry][currx] = -99;  //right
-            s.push(curry, currx-1);
+
+        }else if(!visited(A,curry,currx+1) && (A[curry][currx] <= A[curry][currx+1])){
+
+            A[curry][currx] = -99;  //right
+            s.push(curry, currx+1);
             str = s.peek();
-            curry = str[0];
-            currx = str[1];
+            curry = str[0] - '0';
+            currx = str[1] - '0';
             len--;
-                        std:: cout << "hey3333333eyeyeyey" << std:: endl;
+            std:: cout << "hey3333333eyeyeyey" << std:: endl;
+                    std:: cout << len << std:: endl;
 
-        }else if(!visited(A,curry,currx-1) && (A[curry][currx] <=A[curry][currx-1])){
+        }else if(!visited(A,curry+1,currx) && (A[curry][currx] <=A[curry+1][currx])){
+            
             A[curry][currx] = -99;  //down
-            s.push(curry, currx-1);
+            s.push(curry+1, currx);
             str = s.peek();
-            curry = str[0];
-            currx = str[1];
+            curry = str[0] - '0';
+            currx = str[1] - '0';
             len--;
-                        std:: cout << "heye4444444yeyeyey" << std:: endl;
-
+            std:: cout << "heye4444444yeyeyey" << std:: endl;
+            std:: cout << len << std:: endl;
         }
+        // std:: cout << len << std:: endl;
+    }if(len > 0){
         
-    }if(len == 0){
         C[0][0] = 'z';
+        
     }
     
     return false;
@@ -136,25 +151,36 @@ int main(){
     int size = V.size();
     int xlen = V[0].size();
     int len = 5;
-    
+    bool done = false;
     std:: vector<std:: vector<char>> C( size , std:: vector<char> (xlen, '-')); 
     printVector(C);
-    for(int i=0; i < size; i ++){
-        
-        for(int j = 0; j < xlen;j++){
 
+    for(int i=0; (i < size) || done == true; i ++){
+
+        for(int j = 0; (j < xlen) || done == true;j++){
+            
             int curry = i + 1;
             int currx = j + 1;
-              if(path_finder(C,A,curry, currx, len)){
-
+              if(!path_finder(C,A,curry, currx, len)){
+                  std:: cout << "found it" << std:: endl;
+                  
+                  printVector(C);
+                  done = true;
+                  break;
               }  
         }
+        
+        if(done){
+            break;
+        }
+        
     }
-    if(len == 0){
+    if(len <= 0){
         std:: cout << "test test test " << std:: endl;
     }else{
         std:: cout << "Sorry no solution was found" << std:: endl; 
     }
+    std:: cout << C[0][0] << std:: endl;
     
     return 0;
 }

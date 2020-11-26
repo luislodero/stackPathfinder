@@ -13,6 +13,13 @@ class stack{
   std:: string peek();
   bool isEmpty();
   int length();
+  
+//   ~ordered_set();
+
+// ordered_set(const ordered_set&);
+
+// const ordered_set& operator = (const ordered_set&);
+  
   private:
   struct node{
     int x,y;
@@ -21,6 +28,77 @@ class stack{
   node *top;
   int size;
 };
+
+// void ordered_set:: delAll(){
+//   node *t = head;
+//   node *c;
+//     while(t){
+//       c = t->next;
+//       delete t;
+//       t = c;
+//     }
+  
+// }
+
+// void ordered_set:: copyList(node *p){
+//   if(p!=nullptr){
+    
+//     head = new node{p->data, nullptr};
+// node* curr = p->next;
+//     node* temp = head;
+
+//     while (curr) {
+//         temp->next = new node{curr->data, nullptr};
+//         temp = temp->next;
+//         curr = curr->next;
+        
+//     }
+    
+//   }
+
+// }
+
+// ordered_set:: ~ordered_set(){
+  
+//   delAll();
+ 
+//   head = nullptr;
+//   curr = nullptr;
+//   std:: cout << "-----------------DELETE-------------------" << std:: endl;
+
+// }
+
+
+// ordered_set:: ordered_set(const ordered_set& os5){
+    
+   
+//     if(os5.head != nullptr){
+//     copyList(os5.head);
+      
+//     }
+    
+//     std:: cout << "-----------------COPY---------------------" << std:: endl;
+// }
+
+
+// const ordered_set& ordered_set:: operator = (const ordered_set & os5){
+  
+//   std:: cout << "-----------------ASSIGNMENT---------------" << std:: endl;
+
+//   if(this->head != os5.head){
+   
+//     delAll();
+//     head = nullptr; 
+//     node *c = os5.head;
+    
+//     if(c){
+//       copyList(c);
+//     }
+//   }
+  
+//   return *this;
+    
+// }
 
 
 stack:: stack(){
@@ -73,6 +151,8 @@ bool stack :: isEmpty(){
   }
   return false;
 }
+
+
 
 
 
