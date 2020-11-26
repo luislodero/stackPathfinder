@@ -2,21 +2,20 @@
 #define STACK_H
 #include <iostream>
 #include <vector>
-
+#include <string>
 
 class stack{
   public:
 
   stack();
-  void push(int x, int y, char c);
-  int pop();
-  int peek();
+  void push(int x, int y);
+  std:: string pop();
+  std:: string peek();
   bool isEmpty();
   int length();
   private:
   struct node{
     int x,y;
-    char c;
     node* next;
   };
   node *top;
@@ -30,8 +29,8 @@ stack:: stack(){
 }
 
 
-void stack:: push(int x, int y, char c){
-  top = new node{x,y,c,top};
+void stack:: push(int x, int y){
+  top = new node{x,y,top};
   size++;
 }
 
@@ -40,8 +39,8 @@ int stack :: length(){
 }
 
 
-node* stack :: pop(){
-      node* ret_val = peek();
+std:: string stack :: pop(){
+      std:: string ret_val = peek();
 
   if(top != nullptr){
     node *c = top->next;
@@ -54,9 +53,12 @@ return ret_val;
 }
 
 
-node* stack :: peek(){
+std:: string stack :: peek(){
   if(!isEmpty()){
-  return top;
+    std:: string s;
+    s += std:: to_string(top->y);
+    s += std:: to_string(top->x);
+  return s;
   }
   else{
     std:: cerr << "TIS EMPTY YO BYEBYE" << std:: endl;
