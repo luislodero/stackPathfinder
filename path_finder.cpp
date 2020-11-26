@@ -57,8 +57,9 @@ bool visited(std:: vector<std:: vector<int>> A, int y, int x){
     return true;
 }
 
-bool path_finder(std:: vector<std:: vector<char>>&C, std:: vector<std:: vector<int>> A, int py, int px, int &len){
-
+bool path_finder(std:: vector<std:: vector<char>>&C, std:: vector<std:: vector<int>> &A, int py, int px, int &len){
+    
+    int count =0;
     stack s;
     s.push(py, px);
     std:: string  str= s.peek();
@@ -66,11 +67,11 @@ bool path_finder(std:: vector<std:: vector<char>>&C, std:: vector<std:: vector<i
     int currx = str[1] - '0';
     //std:: cout << str << std:: endl;
     len--;
-    while(len >= 0){
+    while(len > 0 || count > 0){
         
 
         if((!visited(A,curry,currx-1)) && (A[curry][currx] <=A[curry][currx-1])){
-            
+
             A[curry][currx] = -99;  //left
             s.push(curry, currx-1);
             str = s.peek();
@@ -78,7 +79,8 @@ bool path_finder(std:: vector<std:: vector<char>>&C, std:: vector<std:: vector<i
             currx = str[1] - '0';
             len--;
             std:: cout << "heyeyeye111111yey" << std:: endl;
-                    std:: cout << len << std:: endl;
+            std:: cout << len << std:: endl;
+            std:: cout << curry << " " << currx << std:: endl;
 
             
         }else if(!visited(A,curry-1,currx) && (A[curry][currx] <=A[curry-1][currx])){
@@ -90,8 +92,8 @@ bool path_finder(std:: vector<std:: vector<char>>&C, std:: vector<std:: vector<i
             currx = str[1] - '0';
             len--;
             std:: cout << "hey222222eyeyeyey" << std:: endl;
-                    std:: cout << len << std:: endl;
-                printVector(A);
+            std:: cout << len << std:: endl;
+            std:: cout << curry << " " << currx << std:: endl;
 
 
         }else if(!visited(A,curry,currx+1) && (A[curry][currx] <= A[curry][currx+1])){
@@ -103,8 +105,8 @@ bool path_finder(std:: vector<std:: vector<char>>&C, std:: vector<std:: vector<i
             currx = str[1] - '0';
             len--;
             std:: cout << "hey3333333eyeyeyey" << std:: endl;
-                    std:: cout << len << std:: endl;
-
+            std:: cout << len << std:: endl;
+            std:: cout << curry << " " << currx << std:: endl;
         }else if(!visited(A,curry+1,currx) && (A[curry][currx] <=A[curry+1][currx])){
             
             A[curry][currx] = -99;  //down
@@ -115,15 +117,27 @@ bool path_finder(std:: vector<std:: vector<char>>&C, std:: vector<std:: vector<i
             len--;
             std:: cout << "heye4444444yeyeyey" << std:: endl;
             std:: cout << len << std:: endl;
+                        std:: cout << curry << " " << currx << std:: endl;
+
+        }else{
+            return false;
         }
-        // std:: cout << len << std:: endl;
-    }if(len > 0){
-        
-        C[0][0] = 'z';
         
     }
+    // if(len != 0){
+        
+    //     C[0][0] = 'z';
+        
+    // }
     
-    return false;
+    // std:: cout << s.pop() << std:: endl;
+    // std:: cout << s.pop() << std:: endl;
+    // std:: cout << s.pop() << std:: endl;
+    // std:: cout << s.pop() << std:: endl;
+    
+    
+
+    return true;
     
 }
 
@@ -155,15 +169,14 @@ int main(){
     std:: vector<std:: vector<char>> C( size , std:: vector<char> (xlen, '-')); 
     printVector(C);
 
-    for(int i=0; (i < size) || done == true; i ++){
+    for(int i=0; (i < size); i ++){
 
-        for(int j = 0; (j < xlen) || done == true;j++){
+        for(int j = 0; (j < xlen);j++){
             
             int curry = i + 1;
             int currx = j + 1;
               if(!path_finder(C,A,curry, currx, len)){
                   std:: cout << "found it" << std:: endl;
-                  
                   printVector(C);
                   done = true;
                   break;
@@ -177,6 +190,8 @@ int main(){
     }
     if(len <= 0){
         std:: cout << "test test test " << std:: endl;
+                    printVector(A);
+
     }else{
         std:: cout << "Sorry no solution was found" << std:: endl; 
     }
