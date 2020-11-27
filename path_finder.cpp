@@ -65,92 +65,68 @@ bool path_finder(std:: vector<std:: vector<char>>&C, std:: vector<std:: vector<i
     std:: string  str= s.peek();
     int curry = str[0] - '0';
     int currx = str[1] - '0';
-    //std:: cout << str << std:: endl;
     len--;
     
     while(len >= 0 || count > 0){
-        std:: cout << str << std:: endl;
 /**
  * GOTTA MAKE SURE DIRECTIONS ARE CLEAR AND 
- * MAKE SURE IT'S NOT MOVING TO A SMALLER NUMBER PLS
+ * MAKE SURE IT'S NOT MOVING TO A SMALLER NUMBER BEFORE SUBMITTING
  *
 **/
         if((!visited(A,curry,currx-1)) && (A[curry][currx] <=A[curry][currx-1])){
-            std:: cout << A[curry][currx] <<"moving left to " << A[curry][currx-1] << std:: endl;
 
-            A[curry][currx] = -99;  //left
+            A[curry][currx] = -59;  //left
+            C[curry-1][currx-1] = '<';
             s.push(curry, currx-1);
             str = s.peek();
             curry = str[0] - '0';
             currx = str[1] - '0';
             len--;
-            std:: cout << len << std:: endl;
-            //std:: cout << str << std:: endl;
-if(len == 0){
-                A[curry][currx] = -69;
+            if(len <= 0){
+                C[curry-1][currx-1] = '*';
             }
             
         }else if(!visited(A,curry-1,currx) && (A[curry][currx] <=A[curry-1][currx])){
-            std:: cout << A[curry][currx] << "moving up to "<< A[curry-1][currx] << std:: endl;
 
-            A[curry][currx] = -99;  //up
+            A[curry][currx] = -79;  //up
+            C[curry-1][currx-1] = '^';
             s.push(curry-1, currx);
             str = s.peek();
             curry = str[0] - '0';
             currx = str[1] - '0';
             len--;
-            std:: cout << len << std:: endl;
-            //std:: cout << str<< std:: endl;
-if(len == 0){
-                A[curry][currx] = -69;
+            if(len <= 0){
+                C[curry-1][currx-1] = '*';
             }
-
         }else if(!visited(A,curry,currx+1) && (A[curry][currx] <= A[curry][currx+1])){
-            std:: cout <<A[curry][currx] << "moving right to" << A[curry][currx+1]<< std:: endl;
-
+            
             A[curry][currx] = -99;  //right
+            C[curry-1][currx-1] = '>';
             s.push(curry, currx+1);
             str = s.peek();
             curry = str[0] - '0';
             currx = str[1] - '0';
             len--;
-            std:: cout << len << std:: endl;
-            //std:: cout << str << std:: endl;
-            if(len == 0){
-                A[curry][currx] = -69;
+            if(len <= 0){
+                C[curry-1][currx-1] = '*';
             }
         }else if(!visited(A,curry+1,currx) && (A[curry][currx] <=A[curry+1][currx])){
-                        std:: cout << A[curry][currx] << "moving down" << A[curry+1][currx]<< std:: endl;
 
             A[curry][currx] = -99;  //down
+            C[curry][currx] = 'v';
             s.push(curry+1, currx);
             str = s.peek();
             curry = str[0] - '0';
             currx = str[1] - '0';
             len--;
-            std:: cout << len << std:: endl;
-            //std:: cout << str << std:: endl;
-            if(len == 0){
-                A[curry][currx] = -69;
+            if(len <= 0){
+                C[curry-1][currx-1] = '*';
             }
         }else{
             return false;
         }
         
     }
-    if(len <= 0){
-        
-        C[0][0] = 'z';
-        
-    }
-    
-    // std:: cout << s.pop() << std:: endl;
-    // std:: cout << s.pop() << std:: endl;
-    // std:: cout << s.pop() << std:: endl;
-    // std:: cout << s.pop() << std:: endl;
-    
-    
-
     return true;
     
 }
@@ -158,12 +134,14 @@ if(len == 0){
 
 
 int main(){
-    stack s;
+    
+    int len;
     std:: string filename = "matrix.txt";
     
     std:: ifstream ifs;
     ifs.open(filename);
-    
+    std :: cout << " Pick a length" << std:: endl;
+    std:: cin >> len;
     std:: vector<std:: vector<int>> V;
     std:: string str;
     
@@ -174,27 +152,22 @@ int main(){
 
     printVector(V);
     A = fillVector(V);
-    printVector(A);
     
     int size = V.size();
     int xlen = V[0].size();
-    int len = 5;
     bool done = false;
     std:: vector<std:: vector<char>> C( size , std:: vector<char> (xlen, '-')); 
-    printVector(C);
-
     for(int i=0; (i < size); i ++){
 
         for(int j = 0; (j < xlen);j++){
             
             int curry = i + 1;
             int currx = j + 1;
-              if(path_finder(C,A,curry, currx, len)){
-                  std:: cout << "found it" << std:: endl;
-                  printVector(C);
-                  done = true;
-                  break;
-              }  
+             if(path_finder(C,A,curry, currx, len)){
+                 std:: cout << "Found solution" << std:: endl;
+                 done = true;
+                 break;
+             }  
         }
         
         if(done){
@@ -202,14 +175,11 @@ int main(){
         }
         
     }
-    if(len <= 0){
-        std:: cout << "test test test " << std:: endl;
-                    printVector(A);
-
+    if(done){
+        printVector(C);
     }else{
         std:: cout << "Sorry no solution was found" << std:: endl; 
     }
-    std:: cout << C[0][0] << std:: endl;
-    
+
     return 0;
 }

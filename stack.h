@@ -6,7 +6,6 @@
 
 class stack{
  
-  //const stack& operator = (const stack&);
   
   private:
   struct node{
@@ -30,6 +29,8 @@ class stack{
   void copyList(node *p);
   ~stack();
   stack(const stack&);
+  const stack& operator = (const stack&);
+
   
 };
 
@@ -67,7 +68,6 @@ stack:: ~stack(){
   delAll();
  
   top = nullptr;
-  std:: cout << "-----------------DELETE-------------------" << std:: endl;
 
 }
 
@@ -79,28 +79,26 @@ stack:: stack(const stack& os5){
   copyList(os5.top);
   }
     
-  std:: cout << "-----------------COPY---------------------" << std:: endl;
 }
 
 
-// const ordered_set& ordered_set:: operator = (const ordered_set & os5){
+const stack& stack:: operator = (const stack & os5){
   
-//   std:: cout << "-----------------ASSIGNMENT---------------" << std:: endl;
 
-//   if(this->head != os5.head){
+  if(this->top != os5.top){
    
-//     delAll();
-//     head = nullptr; 
-//     node *c = os5.head;
+    delAll();
+    top = nullptr; 
+    node *c = os5.top;
     
-//     if(c){
-//       copyList(c);
-//     }
-//   }
+    if(c){
+      copyList(c);
+    }
+  }
   
-//   return *this;
+  return *this;
     
-// }
+}
 
 
 stack:: stack(){
