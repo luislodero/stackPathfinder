@@ -4,6 +4,13 @@
 #include <vector>
 #include <string>
 
+/**
+ * Student: Luis Hector Lopez de la Rosa
+ * Student #: 100319615
+ * Date: November 26, 2020
+ * Description: This class creates a stack of coordinates from a 2d vector.
+ **/
+
 class stack{
  
   
@@ -34,6 +41,9 @@ class stack{
   
 };
 
+//Input: none
+//Output: none
+//This function deletes the linked list and its contents.
 void stack:: delAll(){
   node *t = top;
   node *c;
@@ -45,6 +55,9 @@ void stack:: delAll(){
   
 }
 
+//Input: node pointer p.
+//Output: none
+//This function copies a linked list based on the node given in the parameter.
 void stack:: copyList(node *p){
   if(p!=nullptr){
     
@@ -63,6 +76,8 @@ void stack:: copyList(node *p){
 
 }
 
+// Destructor
+// Deletes the current linked list and its contents.
 stack:: ~stack(){
   
   delAll();
@@ -72,6 +87,8 @@ stack:: ~stack(){
 }
 
 
+// Copy constructor
+// Copies the contents of the linked list given in the parameters.
 stack:: stack(const stack& os5){
     
    
@@ -81,7 +98,8 @@ stack:: stack(const stack& os5){
     
 }
 
-
+//Assignment operator overload
+//This will delete the contents of the current linked list and copy the contents of the given ordered set onto the current ordered set.
 const stack& stack:: operator = (const stack & os5){
   
 
@@ -100,23 +118,28 @@ const stack& stack:: operator = (const stack & os5){
     
 }
 
-
+//Class constructor: top pointer will be set to nullptr and size to 0.
 stack:: stack(){
   top = nullptr;
   size = 0;
 }
 
-
+//Input: int y int x representing coordinates of a 2d vector
+//Output: none
+//Push function inserts a new set of coordinates to the beginning of the linked list.
 void stack:: push(int y, int x){
   top = new node{y,x,top};
   size++;
 }
 
+//Input: none
+//Output: int representing size of linked list.
 int stack :: length(){
   return size;
 }
 
-
+//Input: none
+//Output: string containing coordinates of a 2d vector
 std:: string stack :: pop(){
       std:: string ret_val = peek();
 
@@ -131,6 +154,8 @@ return ret_val;
 }
 
 
+//Input: none
+//Output: string containing first element's coordinates
 std:: string stack :: peek(){
   if(!isEmpty()){
     std:: string s;
@@ -144,7 +169,8 @@ std:: string stack :: peek(){
   }
 }
 
-
+// Input: none
+//Output: boolean representing if linked list is empty.
 bool stack :: isEmpty(){
   if(top == nullptr){
     return true;

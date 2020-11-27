@@ -5,6 +5,17 @@
 #include <sstream>
 #include <string>
 
+/**
+ * Student: Luis Hector Lopez de la Rosa
+ * Student #: 100319615
+ * Date: November 26, 2020
+ * Description: This program finds a path of a given length in a 2d vector using a stack.
+ **/
+ 
+ 
+ //Input: Vector by reference A.
+ //Output: none.
+ //This function is only used to print the contents of a 2d vector.
 template<typename T>
 void printVector(std:: vector<std:: vector<T>> &A){
     int x = A.size();
@@ -17,6 +28,10 @@ void printVector(std:: vector<std:: vector<T>> &A){
     }
 }
 
+//Input: Vector by reference V
+//Output: Vector of vectors
+//This function is used to fill a vector based on the parameter taken so as to create a 
+// border of 0 around an original vector.
 std:: vector<std:: vector<int>> fillVector(std:: vector<std:: vector<int>> &V){
     int ysize = V.size()+2;
     int xsize = V[0].size()+2;
@@ -40,6 +55,9 @@ std:: vector<std:: vector<int>> fillVector(std:: vector<std:: vector<int>> &V){
     
 }
 
+//Input: string str
+//Output: vector of integers.
+// This function inserts integers taken from a string into a vector.
 std:: vector<int> getMatrix(std:: string str){
     std:: vector<int> V;
     int k;
@@ -50,6 +68,9 @@ std:: vector<int> getMatrix(std:: string str){
     return V;
 }
 
+//Input: Vector A, int y, int x
+//Output: boolean
+//This function checks if a given coordinate from the given 2d vector is visited or not.
 bool visited(std:: vector<std:: vector<int>> A, int y, int x){
     if(A[y][x] > 0){
         return false;
@@ -57,6 +78,10 @@ bool visited(std:: vector<std:: vector<int>> A, int y, int x){
     return true;
 }
 
+//Input: Vector by reference C, vector by reference A, int py, int px representing coordinates and a integer representing length.
+//Output: boolean.
+//This function returns a booleand based on whether a path was found or not by traversing different coordinates
+//starting from the first given parameters py and px.
 bool path_finder(std:: vector<std:: vector<char>>&C, std:: vector<std:: vector<int>> &A, int py, int px, int &len){
     
     int count =0;
