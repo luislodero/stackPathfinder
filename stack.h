@@ -75,11 +75,11 @@ stack:: ~stack(){
 stack:: stack(const stack& os5){
     
    
-    if(os5.top != nullptr){
-    copyList(os5.top);
-    }
+  if(os5.top != nullptr){
+  copyList(os5.top);
+  }
     
-    std:: cout << "-----------------COPY---------------------" << std:: endl;
+  std:: cout << "-----------------COPY---------------------" << std:: endl;
 }
 
 
@@ -136,8 +136,8 @@ return ret_val;
 std:: string stack :: peek(){
   if(!isEmpty()){
     std:: string s;
-    s += std:: to_string(top->y);
     s += std:: to_string(top->x);
+    s += std:: to_string(top->y);
   return s;
   }
   else{

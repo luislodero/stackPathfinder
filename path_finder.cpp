@@ -67,14 +67,16 @@ bool path_finder(std:: vector<std:: vector<char>>&C, std:: vector<std:: vector<i
     int currx = str[1] - '0';
     //std:: cout << str << std:: endl;
     len--;
-    while(len > 0 || count > 0){
-        
+    
+    while(len >= 0 || count > 0){
+        std:: cout << str << std:: endl;
 /**
  * GOTTA MAKE SURE DIRECTIONS ARE CLEAR AND 
  * MAKE SURE IT'S NOT MOVING TO A SMALLER NUMBER PLS
  *
 **/
         if((!visited(A,curry,currx-1)) && (A[curry][currx] <=A[curry][currx-1])){
+            std:: cout << A[curry][currx] <<"moving left to " << A[curry][currx-1] << std:: endl;
 
             A[curry][currx] = -99;  //left
             s.push(curry, currx-1);
@@ -82,25 +84,29 @@ bool path_finder(std:: vector<std:: vector<char>>&C, std:: vector<std:: vector<i
             curry = str[0] - '0';
             currx = str[1] - '0';
             len--;
-            std:: cout << "heyeyeye111111yey" << std:: endl;
             std:: cout << len << std:: endl;
-            std:: cout << curry << " " << currx << std:: endl;
-
+            //std:: cout << str << std:: endl;
+if(len == 0){
+                A[curry][currx] = -69;
+            }
             
         }else if(!visited(A,curry-1,currx) && (A[curry][currx] <=A[curry-1][currx])){
-            
+            std:: cout << A[curry][currx] << "moving up to "<< A[curry-1][currx] << std:: endl;
+
             A[curry][currx] = -99;  //up
             s.push(curry-1, currx);
             str = s.peek();
             curry = str[0] - '0';
             currx = str[1] - '0';
             len--;
-            std:: cout << "hey222222eyeyeyey" << std:: endl;
             std:: cout << len << std:: endl;
-            std:: cout << curry << " " << currx << std:: endl;
-
+            //std:: cout << str<< std:: endl;
+if(len == 0){
+                A[curry][currx] = -69;
+            }
 
         }else if(!visited(A,curry,currx+1) && (A[curry][currx] <= A[curry][currx+1])){
+            std:: cout <<A[curry][currx] << "moving right to" << A[curry][currx+1]<< std:: endl;
 
             A[curry][currx] = -99;  //right
             s.push(curry, currx+1);
@@ -108,21 +114,25 @@ bool path_finder(std:: vector<std:: vector<char>>&C, std:: vector<std:: vector<i
             curry = str[0] - '0';
             currx = str[1] - '0';
             len--;
-            std:: cout << "hey3333333eyeyeyey" << std:: endl;
             std:: cout << len << std:: endl;
-            std:: cout << curry << " " << currx << std:: endl;
+            //std:: cout << str << std:: endl;
+            if(len == 0){
+                A[curry][currx] = -69;
+            }
         }else if(!visited(A,curry+1,currx) && (A[curry][currx] <=A[curry+1][currx])){
-            
+                        std:: cout << A[curry][currx] << "moving down" << A[curry+1][currx]<< std:: endl;
+
             A[curry][currx] = -99;  //down
             s.push(curry+1, currx);
             str = s.peek();
             curry = str[0] - '0';
             currx = str[1] - '0';
             len--;
-            std:: cout << "heye4444444yeyeyey" << std:: endl;
             std:: cout << len << std:: endl;
-            std:: cout << curry << " " << currx << std:: endl;
-
+            //std:: cout << str << std:: endl;
+            if(len == 0){
+                A[curry][currx] = -69;
+            }
         }else{
             return false;
         }
@@ -179,7 +189,7 @@ int main(){
             
             int curry = i + 1;
             int currx = j + 1;
-              if(!path_finder(C,A,curry, currx, len)){
+              if(path_finder(C,A,curry, currx, len)){
                   std:: cout << "found it" << std:: endl;
                   printVector(C);
                   done = true;
